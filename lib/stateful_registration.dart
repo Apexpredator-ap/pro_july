@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pro_july/stateful_login.dart';
 
+void main(){
+  runApp(MaterialApp(home: Reg_stateful(),));
+}
 
 class Reg_stateful extends StatefulWidget {
   @override
@@ -10,6 +13,8 @@ class Reg_stateful extends StatefulWidget {
 class _Reg_statefulState extends State<Reg_stateful> {
   final formkey = GlobalKey<FormState>();
   String? pass;
+  bool passwordhidden = true;
+  bool cpasshidden = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,6 +68,8 @@ class _Reg_statefulState extends State<Reg_stateful> {
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: TextFormField(
+                  obscuringCharacter: "*",
+                  obscureText: passwordhidden,
                   validator: (password) {
                     pass = password;
                     if (password!.isEmpty || password.length < 6) {
@@ -71,7 +78,21 @@ class _Reg_statefulState extends State<Reg_stateful> {
                       return null;
                     }
                   },
-                  decoration: const InputDecoration(
+                  decoration:  InputDecoration(
+                      suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              if(passwordhidden == true){
+                                passwordhidden = false;
+                              }else{
+                                passwordhidden = true;
+                              }
+                            });
+                          },
+                          icon: Icon(passwordhidden == true
+                              ? Icons.visibility_off_sharp
+                              : Icons.visibility)),
+
                       border: OutlineInputBorder(),
                       hintText: 'Password'),
                 ),
@@ -86,19 +107,34 @@ class _Reg_statefulState extends State<Reg_stateful> {
                       return null;
                     }
                   },
-                  decoration: const InputDecoration(
+                  obscureText: cpasshidden,
+                  obscuringCharacter: "*",
+                  decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      hintText: 'Password'),
+                      hintText: 'Password',
+    suffixIcon: IconButton(onPressed: (){
+    setState(() {
+    if(cpasshidden ==true){
+    cpasshidden = false;
+    }else{
+    cpasshidden= true;
+    }
+    });
+    },
+        icon: Icon(cpasshidden== true?
+        Icons.visibility_off_sharp:Icons.visibility))),
                 ),
               ),
-              ElevatedButton(onPressed: () {
+
+
+  ElevatedButton(onPressed: () {
                 final valid = formkey.currentState!.validate();
                 if(valid){
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context)=>Login_stateful()));
                 }else{
                   ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Inavlid datas'))
+                      const SnackBar(content: Text('Invalid datas'))
                   );
                 }
               }, child: Text("Login"))
