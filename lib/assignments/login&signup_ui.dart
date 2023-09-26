@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pro_july/assignments/login.dart';
 import 'package:pro_july/assignments/regis.dart';
 
-void main()
-{
+void main(){
   runApp(MaterialApp(home: Loginandsignup(),));
 }
 class Loginandsignup extends StatelessWidget {
