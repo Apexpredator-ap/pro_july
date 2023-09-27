@@ -19,11 +19,15 @@ class stackEx extends StatelessWidget {
               width: 500,
               color:Colors.red,
         ),
-          Container(
-          height: 300,
+         Positioned(
+           top: 280,
+           left: 180,
+           child:Container(
+           height: 300,
           width: 300,
           color:Colors.green,
-            ),
+           ), ),
+
           Container(
             height: 100,
             width: 100,
