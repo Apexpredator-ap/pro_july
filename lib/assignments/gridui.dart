@@ -1,140 +1,72 @@
+
+
+
+
 import 'package:flutter/material.dart';
 void main(){
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: Profile_Stack(),));
+  runApp(MaterialApp(home: GridUi(),));
 }
-
-class Profile_Stack extends StatelessWidget {
-// const ({super.key});
-
+class GridUi extends StatelessWidget {
   @override
+
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Icon(Icons.menu),
-        title: Center(
-            child: Text('Profile')),
-        actions: [
-
-          PopupMenuButton(itemBuilder: (context){
-            return[
-
-            ];
-          }),
-        ],
-      ),
-      body: Stack(
-        children: [
-          Column(
-            children: [
-              Container(
-                  height: MediaQuery.of(context).size.height/2,
-                  child: Image.asset("assets/images/ice  mount.jpg",
-                    fit: BoxFit.cover,
-                    width: 2500,
-                    height: 170,)
-              ),
-            ],
-          ),
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.only(top:250),
-              child: Column(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                            color: Colors.white,
-                            width: 4
-                        )
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 20),
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 20),
-                        child: CircleAvatar(
-                          radius: 90,
-                          backgroundColor: Colors.white,
-                          //foregroundColor: Colors.white,
-                          backgroundImage: AssetImage("assets/images/Beckham.jpg"),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Text('David Beckham',style: TextStyle(
-                    fontSize: 20,fontWeight: FontWeight.bold,
-                  ),),
-                  SizedBox(height:8,),
-                  Text('Model/Actress',style: TextStyle(
-                      fontSize: 10,
-                      color: Colors.blue
-                  ),),
-                ],
-              ),
+      body: GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2, // Number of columns in the grid
+        ),
+        itemCount: 12, // Number of grid items
+        itemBuilder: (context, index) {
+          // Define colors and icons for each grid item
+          List<Color> colors = [Colors.blue, Colors.yellow,
+            Colors.green, Colors.pink,
+            Colors.orange,Colors.deepPurpleAccent,
+            Colors.teal,Colors.black38,Colors.yellow,
+            Colors.deepOrange,Colors.greenAccent,Colors.brown];
+          List<IconData> icons = [ Icons.home,
+            Icons.home,
+            Icons.camera,
+            Icons.star, Icons.wifi_1_bar_outlined,
+            Icons.bookmark,Icons.phone, Icons.message,
+            Icons.newspaper,
+            Icons.sim_card, Icons.mic_off_rounded,
+            Icons.pageview_outlined];
+          return Container(
+            constraints: BoxConstraints(
+                minWidth: 30.0,minHeight: 10.0,
+                maxWidth: 50.0,maxHeight: 30.0
+            ),margin: EdgeInsets.all(10.0),
+            padding: EdgeInsets.all(10.0),
+            decoration: BoxDecoration(
+              color: colors[index],
+              borderRadius: BorderRadius.circular(30.0),
             ),
-          ),
-          Center(
-            child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only( top: 50),
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom:6),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 268),
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children:[ CircleAvatar(
-                          radius: 30,
-                          backgroundColor: Colors.red,
-                          //foregroundColor: Colors.white,
-                          // backgroundImage: AssetImage("assets/images/view2.jpeg"),
-                        ),
-                          Icon(Icons.message,
-                            color: Colors.white,)
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),),
-          Center(
-            child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only( top: 50),
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom:6),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 678),
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children:[ Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 30,
-                              backgroundColor: Colors.blue,
-                              //foregroundColor: Colors.white,
 
-// backgroundImage: AssetImage("assets/images/view2.jpeg"),
-                            ),
-                          ],
-                        ),
-                          Icon(Icons.add,
-                            color: Colors.white,)
-                        ],
-                      ),
-                    ),
-                  ),
+            child: Row(
+              children: [
+                Icon(
+                  icons[index],
+                  size: 80.0,
+                  color: Colors.black38,
                 ),
-              ],
-            ),),
-        ],
+                Padding(
+                  padding: const EdgeInsets.all(40),
+                  child: Column(mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Heart',style: TextStyle(color:Colors.black38,fontSize: 25)),
+
+
+                      Text('Shaker',style: TextStyle(color:Colors.black38,fontSize: 25)),
+
+                    ],),
+                ),
+              ],),
+          );
+        },
       ),
     );
-
   }
 }
+
+
+
