@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pro_july/assignments/login.dart';
 import 'package:pro_july/assignments/regis.dart';
+
+import 'login.dart';
+
 
 void main(){
   runApp(MaterialApp(home: Loginandsignup(),));
