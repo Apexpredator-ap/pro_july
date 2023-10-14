@@ -1,69 +1,52 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MaterialApp(
-    home: NavDrawer(),
-  ));
+  runApp(MyApp());
 }
 
-class NavDrawer extends StatelessWidget {
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Drawer"),
+        title: Text('Two Containers and a ListView'),
       ),
-      drawer: Theme(
-        data: Theme.of(context).copyWith(canvasColor: Colors.white),
-        child: Drawer(
-          child: ListView(
+      body: Column(
+        children: [
+          Row(
             children: [
               Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(begin: Alignment.bottomRight,
-                  end: Alignment.topRight,
-                  colors: [
-                    Colors.pink,
-                    Colors.white,
-                    Colors.blue
-                  ])
-                ),
-                child: UserAccountsDrawerHeader(
-                  accountName: const Text("Sundar pichai",style: TextStyle(color: Colors.black),),
-                  accountEmail: const Text("CEO of Alphabet inc",style: TextStyle(color: Colors.black)),
-                  currentAccountPicture: GestureDetector(
-                    onTap: () {
-                     Navigator.of;
-                    },
-                    child:  CircleAvatar(
-                      backgroundImage: AssetImage("Beckham.jpg"),
-
-                    ),
-                  ),
-
-
-                ),
+                width: 150,
+                height: 150,
+                color: Colors.blue,
+                margin: EdgeInsets.all(10),
               ),
-               ListTile(
-                leading: Icon(Icons.dashboard),
-                title: Text("DashBoard"),
-              ),
-              ListTile(
-                leading: Icon(Icons.leak_add_sharp),
-                title: Text("Leads"),
-              ),
-            ListTile(
-                leading: Icon(Icons.person),
-                title: Text("Clients"),
-              ),
-
-             ListTile(
-                leading: Icon(Icons.rocket_launch),
-                title: Text("Projects"),
+              Container(
+                width: 150,
+                height: 150,
+                color: Colors.green,
+                margin: EdgeInsets.all(10),
               ),
             ],
           ),
-        ),
+          Expanded(
+            child: ListView(
+              children: [
+
+                // Add more list items as needed
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
