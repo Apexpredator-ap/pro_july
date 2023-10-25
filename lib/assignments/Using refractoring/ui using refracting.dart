@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-
-
 import 'custom_refracting.dart';
-
 void main(){
   runApp(MaterialApp(
     home:Grid_with_refractoring_widget() ,
