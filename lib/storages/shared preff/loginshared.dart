@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pro_july/storages/registration.dart';
+import 'package:pro_july/storages/shared%20preff/registration.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'homeshared.dart';
 
 void main() {

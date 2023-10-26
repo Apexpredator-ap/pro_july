@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 
-class Ref_widget_ffz extends StatelessWidget {
+class Ref_widget extends StatelessWidget {
   NetworkImage? image;
   String? name;
   String? price;
   String? qty;
   ElevatedButton? elevatedButton;
-   VoidCallback? click;
+  // String? add;
+  VoidCallback? click;
 
-  Ref_widget_ffz({
+  Ref_widget({
     required this.image,
     required this.name,
     required this.price,
     required this.qty,
     required this.elevatedButton,
+    // required this.add,
     required this.click
 
   });
@@ -31,14 +33,14 @@ class Ref_widget_ffz extends StatelessWidget {
           Align(
               alignment: Alignment.centerLeft,
               child: Padding(
-                padding: const EdgeInsets.only(left: 20.0),
-                child: Text(name!,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                padding: const EdgeInsets.only(left: 15.0),
+                child: Text(name!,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
               )),
           Align(
               alignment: Alignment.centerLeft,
               child: Padding(
-                padding: const EdgeInsets.only(left: 15.0),
-                child: Text(price!,style: TextStyle(fontSize: 15),),
+                padding: const EdgeInsets.only(left: 12.0),
+                child: Text(price!,style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold),),
               )),
           Row(
             children: [
@@ -46,7 +48,7 @@ class Ref_widget_ffz extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 15.0,bottom: 10),
                 child: Text(qty!),
               ),
-              SizedBox(width: 400,),
+              SizedBox(width: 90,),
               Padding(
                 padding: const EdgeInsets.only(bottom: 10.0),
                 child: ElevatedButton( onPressed: (){}, child: Text('ADD', style: TextStyle(fontWeight: FontWeight.bold),),
