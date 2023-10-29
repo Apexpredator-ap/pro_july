@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '3login.dart';
-
-
-
 void main() {
   runApp(MaterialApp(
     home: Tour_Sign_up(),
