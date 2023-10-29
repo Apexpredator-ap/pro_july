@@ -1,125 +1,96 @@
 import 'package:flutter/material.dart';
-class Tour_Home extends StatefulWidget {
 
-  @override
-  State<Tour_Home> createState() => _Tour_HomeState();
-}
+import '../data/dummydata.dart';
 
-class _Tour_HomeState extends State<Tour_Home> {
+class Tour_Home extends StatelessWidget {
+  const Tour_Home({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        leading: Icon(
-          Icons.menu,
-          color: Colors.black,
-        ),
-        centerTitle: true,
-        title: Row(
-          children: [
-            SizedBox(
-              width: 85,
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            pinned: true,
+            title: Text(
+              'GoFast',
+              style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            Text(
-              "Go",
-              style: TextStyle(
-                color: Colors.blue,
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              "Fast",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: CircleAvatar(),
-          ),
-        ],
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(80),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
+            centerTitle: true,
+            backgroundColor: Colors.white,
+            leading: Icon(Icons.menu, color: Colors.black),
+            actions: [
+              CircleAvatar(child: Icon(Icons.person)),
+            ],
+            bottom: AppBar(
+              backgroundColor: Colors.white,
+              title: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(45),
                 ),
-                filled: true,
-                fillColor: Colors.grey[50],
-                hintText: "Serach",
-                suffixIcon: Icon(Icons.search),
-              ),
-            ),
-          ),
-        ),
-      ),
-      body: ListView(
-        children: [
-          Container(
-            height: 30,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Popular Places",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                width: double.infinity,
+                height: 40,
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'Search',
+                    suffixIcon: Icon(Icons.search),
                   ),
-                  Text("View All"),
-                ],
+                ),
               ),
             ),
           ),
-          SizedBox(
-            height: 25,
-          ),
-          Container(
-            height: 400,
-            child: GridView(
-              padding: EdgeInsets.all(8),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, mainAxisSpacing: 10, crossAxisSpacing: 10),
-              children: touristlist
-                  .map((e) => Touristwidget(
-                image: e['image1'],
-                name: e['title'],
-                onclick: () => gotodetails(context, e['id']),
-                rating: e['rating'],
-              ))
-                  .toList(),
+          SliverGrid(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+            ),
+            delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GestureDetector(
+                    onTap: ()=>
+                        Navigator.of(context).pushNamed('details', arguments: details[index]['Id']),
+
+                    child: Stack(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(30),
+                              image: DecorationImage(image: NetworkImage(details[index]['image']),fit: BoxFit.cover)
+                          ),
+                        ),
+                        Positioned(
+                            bottom:10,
+                            left: 10,
+                            child: Text(details[index]['title'],style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),))
+                      ],
+                    ),
+                  ),
+                );
+              },
+              childCount: details.length, // Set the actual count of your data
             ),
           ),
-          Container(
-            height: 100,
-            child: Padding(
-              padding: const EdgeInsets.all(13.0),
-              child: ElevatedButton(
-                style:
-                ElevatedButton.styleFrom(backgroundColor: Colors.blue[700]),
-                onPressed: () {},
-                child: Text("Explore Now"),
-              ),
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
+                SizedBox(height: 40,),
+                Container(
+                  height: 35,
+                  width: 490,
+                  decoration: BoxDecoration (
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.indigo[900]
+                  ),
+                  child: Text('Explore Now',style: TextStyle(color: Colors.white,fontSize: 17, fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+                ),
+              ],
             ),
-          ),
+          )
         ],
       ),
     );
-  }
-
-  void gotodetails(BuildContext context, touristid) {
-    Navigator.pushNamed(context, 'Details', arguments: touristid);
   }
 }

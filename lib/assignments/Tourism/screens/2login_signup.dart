@@ -1,8 +1,21 @@
-import 'package:flutter/material.dart';
-import 'package:pro_july/assignments/Tourism/screens/3login.dart';
-import 'package:pro_july/assignments/Tourism/screens/4signup.dart';
 
-class Login_SignUp extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import '3login.dart';
+import '4signup.dart';
+
+
+
+void main(){
+  runApp(MaterialApp(
+    home: Login_signup(),
+  ));
+}
+
+class Login_signup extends StatelessWidget {
+  const Login_signup({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -10,100 +23,66 @@ class Login_SignUp extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/images/loggggpng-hq.png',
-              width: 300,height: 300,),
-            SizedBox(
-              height: 20,
+            Image.asset('assets/images/loggggpng-hq.png',height: 250,width: 250,),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 50,vertical: 5),
+              child: MaterialButton(onPressed: (){
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Tour_Signin()));
+              },
+                color: Colors.lightBlueAccent,
+                child: ListTile(
+                  title: Text('Login'),
+                  trailing: Icon(Icons.login),
+                ),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)
+                ),
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 50,vertical: 5),
               child: MaterialButton(onPressed: (){
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => Tour_Signin()));
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Tour_Sign_up()));
               },
+                color: Colors.green,
+                child: ListTile(
+                  title: Text('Register'),
+                  trailing:Icon(Icons.app_registration),
+                ),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 50,vertical: 5),
+              child: MaterialButton(onPressed: (){},
                 color: Colors.blue,
+                child: ListTile(
+                  title: Text('Login with Facebook'),
+                  trailing: FaIcon(FontAwesomeIcons.facebook),
+                ),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30)
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 70.0,vertical: 5),
-                  child: ListTile(
-                    title: Text('Login Here'),
-                    trailing: Icon(Icons.people_alt_outlined),
-                  ),
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: MaterialButton(onPressed: (){
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => Tour_SignUp()));
-              },
-                color: Colors.blue,
+              padding: const EdgeInsets.symmetric(horizontal: 50,vertical: 5),
+              child: MaterialButton(onPressed: (){},
+                color: Colors.red,
+                child: ListTile(
+                  title: Text('Login with Google'),
+                  trailing: FaIcon(FontAwesomeIcons.google),
+                ),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30)
                 ),
-                child: Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 70.0,vertical: 5),
-                  child: ListTile(
-                    title: Text('Register Here'),
-                    trailing: Icon(Icons.person_add_alt_1_outlined),
-                  ),
-                ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: MaterialButton(onPressed: (){
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => Tour_SignUp()));
-              },
-                color: Colors.blueAccent,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30)
-                ),
-                child: Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 70.0,vertical: 5),
-                  child: ListTile(
-                    title: Text('Login with FaceBook'),
-                    trailing: Icon(Icons.facebook),
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: MaterialButton(onPressed: (){
-
-              },
-                color: Colors.blueAccent,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30)
-                ),
-                child: Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 70.0,vertical: 5),
-                  child: ListTile(
-                    title: Text('Login with Google'),
-                    trailing: Icon(Icons.facebook),
-                  ),
-                ),
-              ),
-            ),
-
-
-
           ],
         ),
       ),
     );
   }
 }
-
-
-
-
-
-
-
-

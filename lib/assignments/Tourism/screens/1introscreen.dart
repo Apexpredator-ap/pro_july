@@ -20,7 +20,7 @@ class _IntroScreenStateState extends State<IntroScreenState> {
   void initState() {
     Timer(const Duration (seconds: 4), () {
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => Login_SignUp()));
+          MaterialPageRoute(builder: (context) => Login_signup()));
     });
     super.initState();
   }

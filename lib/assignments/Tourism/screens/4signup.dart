@@ -1,141 +1,150 @@
-
 import 'package:flutter/material.dart';
-import 'package:pro_july/assignments/Tourism/screens/3login.dart';
 
-class Tour_SignUp extends StatefulWidget {
-  @override
-  State<Tour_SignUp> createState() => _Tour_SignUpState();
+import '3login.dart';
+
+
+
+void main() {
+  runApp(MaterialApp(
+    home: Tour_Sign_up(),
+  ));
 }
 
-class _Tour_SignUpState extends State<Tour_SignUp> {
+class Tour_Sign_up extends StatefulWidget {
+  const Tour_Sign_up({super.key});
+
+  @override
+  State<Tour_Sign_up> createState() => _Tour_Sign_upState();
+}
+
+class _Tour_Sign_upState extends State<Tour_Sign_up> {
   final formkey = GlobalKey<FormState>();
   String? pass;
+  String? cpass;
   bool passwordhidden = true;
-//this means password is hidden
-  bool cpasshidden = true;
+  bool cpasswordhiden = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Form(
-          key: formkey,
+      backgroundColor: Colors.white,
+      body: Container(
+        child: Center(
           child: Column(
             children: [
-              Image.asset(
-                "assets/images/loggggpng-hq.png",
-                height: 200,
-                width: 150,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  keyboardType: TextInputType.name,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(), hintText: 'Name'),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: TextFormField(
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(), hintText: 'Username'),
 
-                  ///here the value entered at text form field will stored at uname
-                  validator: (uname) {
-                    if (uname!.isEmpty ||
-                        !uname.contains('@') ||
-                        !uname.contains('.com')) {
-                      return 'username must not be empty/ or invalid';
-                    } else {
-                      return null;
-                    }
-                  },
+              Container(
+                height: 200,
+                width: 250,
+                child: Image.asset('assets/images/loggggpng-hq.png'),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Text(
+                  'Sign Up',
+                  style: TextStyle(fontSize: 55, fontWeight: FontWeight.bold),
+                ),
+              ),
+              Text('Create an account,its free!'),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.person),
+                      labelText: 'Email ID',
+                      helperText: 'Field must not be empty',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15))),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(), hintText: 'Phone Number'),
-                  validator: (num) {
-                    if (num!.isEmpty || num.length != 10) {
-                      return 'Phone number should have 10 digits/ field must not be empty';
-                    } else {
-                      return null;
-                    }
-                  },
+                padding: const EdgeInsets.only(
+                  left: 20,
+                  right: 20,
                 ),
+                child: TextFormField(
+                    decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.visibility_off),
+                        suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                if (passwordhidden == true) {
+                                  passwordhidden = false;
+                                } else {
+                                  passwordhidden = true;
+                                }
+                              });
+                            },
+                            icon: passwordhidden == true
+                                ? Icon(Icons.visibility_off)
+                                : Icon(Icons.visibility)),
+                        labelText: 'password',
+                        helperText:
+                        'password must contain atleast 6 characters',
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15))),
+                    validator: (password) {
+                      pass = password;
+                      if (password!.isEmpty || password.length < 6) {
+                        return 'password must not be empty and must contain atleast 6 characters';
+                      } else {
+                        return null;
+                      }
+                    },
+                    obscureText: passwordhidden,
+                    obscuringCharacter: '*'),
               ),
               Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.only(
+                    left: 20, right: 20, bottom: 20, top: 15),
                 child: TextFormField(
-                  obscuringCharacter: "*",
-                  obscureText: passwordhidden,
-                  validator: (password) {
-                    pass = password;
-                    if (password!.isEmpty || password.length < 6) {
-                      return 'Password must not be empty/ password length must be > 6';
-                    } else {
-                      return null;
-                    }},
+
                   decoration: InputDecoration(
                       suffixIcon: IconButton(
                           onPressed: () {
                             setState(() {
-                              if(passwordhidden == true){
-                                passwordhidden = false;
-                              }else{
-                                passwordhidden = true;
+                              if (cpasswordhiden == true) {
+                                cpasswordhiden = false;
+                              } else {
+                                cpasswordhiden = true;
                               }
                             });
                           },
-                          icon: Icon(passwordhidden == true
-                              ? Icons.visibility_off_sharp
-                              : Icons.visibility)),
-                      border: OutlineInputBorder(),
-                      hintText: 'Password'),
+                          icon: cpasswordhiden == true
+                              ? Icon(Icons.visibility_off)
+                              : Icon(Icons.visibility)),
+
+                      prefixIcon: Icon(Icons.visibility_off),
+                      labelText: 'Confirm password',
+                      helperText: 'Please  re-enter you password',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15))),
+                  obscureText: cpasswordhiden,
+                  obscuringCharacter: '*',
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: TextFormField(
-                  validator: (cpassword) {
-                    if (cpassword!.isEmpty || cpassword != pass) {
-                      return 'Password must be same/ field must not be empty';
-                    } else {
-                      return null;
-                    }
-                  },
-                  obscureText: cpasshidden,
-                  obscuringCharacter: "*",
-                  decoration:  InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Password',
-                      suffixIcon: IconButton(onPressed: (){
-                        setState(() {
-                          if(cpasshidden ==true){
-                            cpasshidden = false;
-                          }else{
-                            cpasshidden= true;
-                          }
-                        });
-                      },icon: Icon(cpasshidden== true?
-                      Icons.visibility_off_sharp:Icons.visibility))),
-                ),
+              Container(
+                height: 60,
+                width: 1000,
+                child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('login');
+
+                    },
+                    child: Text(
+                      'Sign Up',
+                    ),
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(45)))),
               ),
-              ElevatedButton(
+              TextButton(
                   onPressed: () {
-                    final valid = formkey.currentState!.validate();
-                    if (valid) {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => Tour_Signin()));
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Invalid datas')));
-                    }
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => Tour_Signin()));
                   },
-                  child: Text("Register"))
+                  child: Text('Already have an account? Login'))
             ],
           ),
         ),
