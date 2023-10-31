@@ -11,7 +11,7 @@ class Tour_details extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var id=ModalRoute.of(context)?.settings.arguments;
-    var detail=details.firstWhere((detail) => detail['Id']==id);
+    var detail= details.firstWhere((detail) => detail['Id']==id);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
