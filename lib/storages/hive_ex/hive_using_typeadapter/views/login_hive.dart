@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:pro_july/storages/hive_ex/hive_using_typeadapter/views/reg_hive.dart';
 
+import '../database/hivedb.dart';
 import '../model/users.dart';
+import 'hive_home.dart';
 
 
 
@@ -10,10 +13,10 @@ void main()async{
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   await Hive.openBox<Users>('Users');
-  // await Hive.registerAdapter(adapter);
-  runApp(MaterialApp(home: Hive_Reg(),));}
+  Hive.registerAdapter(UsersAdapter());
+  runApp(GetMaterialApp(home: Hive_Login(),));}
 
-class Hive_Reg extends StatelessWidget {
+class Hive_Login extends StatelessWidget {
   final email_controller =TextEditingController();
   final pwd_controller =TextEditingController();
 
@@ -22,7 +25,7 @@ class Hive_Reg extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Registration Page"),
+        title: Text("Login Page"),
       ),
       body: Center(
         child: Padding(
@@ -47,7 +50,12 @@ class Hive_Reg extends StatelessWidget {
                     hintText: "Password"
                 ) ,
               ),
-              MaterialButton(onPressed: () {},
+              MaterialButton(onPressed: ()  async {
+              final users = await HiveDB.instance.getUsers();
+
+              validateLogin(users);
+
+              },
                 shape: StadiumBorder(),
                 color: Colors.pink,
                 child: Text("Register Here"),),
@@ -60,6 +68,34 @@ class Hive_Reg extends StatelessWidget {
       ),
     );
   }
+
+Future   <void> validateLogin(List<Users> users)  async{
+    final email =email_controller.text.trim();
+    final pwd =pwd_controller.text.trim();
+    bool userFound = false;
+
+    if (email != "" && pwd != ""){
+      await Future.forEach(users, (user) {
+        if(user.email == email && user.password ==pwd) {
+          userFound =true;
+        } else{
+          userFound =false;
+        }
+      });
+      if (userFound ==true) {
+        Get.offAll(()=> HiveHome(email:email));
+        Get.snackbar("Error", "Login Failed, No Users Exists",backgroundColor: Colors.red);
+
+      }
+    } else {
+      Get.snackbar("Error", "Fields Must Not be empty",backgroundColor: Colors.red);
+    }
+
 }
+
+
+}
+
+
 
 
